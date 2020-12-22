@@ -1,2 +1,2 @@
 # python_django
-just python django t
+just python django tutorial
