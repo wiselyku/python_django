@@ -39,6 +39,11 @@ input[name=message] {
     padding-right: 15px;
 }
 
-input[name=taskName] {
+input[name=newTaskName] {
     width: 80%;
+}
+
+.to_do_list th,td {
+    text-align: left;
+    padding-right: 15px;
 }

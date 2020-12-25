@@ -18,6 +18,15 @@ class HomeListView(ListView):
         context = super(HomeListView, self).get_context_data(**kwargs)
         return context
 
+
+class ToDoListView(ListView):
+    model = ToDoList
+
+    def get_context_data(self, **kwargs):
+        context = super(ToDoListView, self).get_context_data(**kwargs)
+        return context
+
+
 def about(request):
     return render(request, "hello/about.html")
 
@@ -59,6 +68,7 @@ def to_do_list(request):
             to_do_data = form.save(commit=False)
             to_do_data.createdDatetime = datetime.now()
             to_do_data.save()
-            return redirect("home")
+            return redirect("to_do_list")
     else:
-        return render(request, "hello/to_do_list.html", {"form": form})
+        return redirect("todo")
+      ##  return render(request, "hello/to_do_list.html", {"form": form})

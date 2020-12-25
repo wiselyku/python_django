@@ -3,9 +3,47 @@
     Add a new to do item
 {% endblock %}
 {% block content %}
-    <form method="POST" class="log-form">
+
+    <h2>To Do List</h2>
+    {% if to_do_list %}
+        <table class="to_do_list">
+            <thead>
+            <tr>
+                <th>CreatedDatetime</th>
+                <th>TaskName</th>
+                <th>TaskDone</th>
+                <th>FinishedDatetime</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for to_do_item in to_do_list %}
+                <tr>
+                    <td>{{ to_do_item.createdDatetime | date:'d M Y H:i:s' }}</td>
+                    <td>{{ to_do_item.taskName }}</td>
+                    {% if to_do_item.taskDone == False %}
+                        <td>尚未完成</td>
+                    {% else %}
+                        <td>已經完成</td>
+                    {% endif %}
+                    
+                    {% if to_do_item.finishedDatetime == null %}
+                        <td>無資料</td>
+                    {% else %}
+                        <td>{{ to_do_item.finishedDatetime | date:'d M Y H:i:s' }}</td>
+                    {% endif %}
+                    
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <p>No to do list have been created. Use the <a href="{% url 'to_do_list' %}">To Do List form</a>.</p>
+    {% endif %}
+
+    <form action="/todolist_add/" method="POST">
         {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit" class="save btn btn-default">submit</button>
+        <label>Enter new task: </label><br>
+        <input id="to_do_list_item" type="text" name="taskName" value="">
+        <input type="submit" value="Submit">
     </form>
 {% endblock %}
