@@ -14,4 +14,12 @@ class LogMessage(models.Model):
         return f"'{self.message}' logged on {date.strftime('%A, %d %B, %Y at %X')}"
 
 
-        
+class ToDoList(models.Model):
+    taskName = models.CharField(max_length=300)
+    createdDatetime = models.DateTimeField("task created datetime")
+    finishedDatetime = models.DateTimeField(null=True)
+    taskDone = models.BooleanField(default=False)
+
+    def __str__(self):
+        datetime = timezone.localtime(self.createdDatetime)
+        return f"'{self.taskName}' is created at {createdDatetime.strftime('%A, %d %B, %Y at %X')}"

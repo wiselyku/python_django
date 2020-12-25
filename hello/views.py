@@ -6,8 +6,8 @@ from datetime import datetime
 from django.http import HttpResponse
 # Add these to existing imports at the top of the file:
 from django.shortcuts import redirect
-from hello.forms import LogMessageForm
-from hello.models import LogMessage
+from hello.forms import LogMessageForm, ToDoListForm
+from hello.models import LogMessage, ToDoList
 from django.views.generic import ListView
 
 class HomeListView(ListView):
@@ -49,3 +49,16 @@ def log_message(request):
             return redirect("home")
     else:
         return render(request, "hello/log_message.html", {"form": form})
+
+
+def to_do_list(request):
+    form = ToDoListForm(request.POST or None)
+
+    if request.method == "POST":
+        if form.is_valid():
+            to_do_data = form.save(commit=False)
+            to_do_data.createdDatetime = datetime.now()
+            to_do_data.save()
+            return redirect("home")
+    else:
+        return render(request, "hello/to_do_list.html", {"form": form})

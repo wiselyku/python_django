@@ -14,4 +14,5 @@ urlpatterns = [
     path("about/", views.about, name="about"),
     path("contact/", views.contact, name="contact"),    
     path("log/", views.log_message, name="log"),
+    path("todo/", views.to_do_list, name="to_do_list"),
 ]
