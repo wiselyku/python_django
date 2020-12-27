@@ -6,6 +6,7 @@ from datetime import datetime
 from django.http import HttpResponse
 # Add these to existing imports at the top of the file:
 from django.shortcuts import redirect
+from django.shortcuts import get_object_or_404
 from hello.forms import LogMessageForm, ToDoListForm
 from hello.models import LogMessage, ToDoList
 from django.views.generic import ListView
@@ -72,3 +73,24 @@ def to_do_list(request):
     else:
         return redirect("todo")
       ##  return render(request, "hello/to_do_list.html", {"form": form})
+
+def to_do_list_edit(request, id):
+    context ={}
+    context["data"] = ToDoList.objects.get(id = id) 
+    return render(request, "hello/to_do_list_edit.html", context) 
+
+
+def to_do_list_edit_ok(request, id):
+    to_do_list_item = get_object_or_404(ToDoList, id=id)
+    taskDone = request.POST.get("taskDone")
+    if taskDone == 'True':
+        to_do_list_item.taskDone = True
+        to_do_list_item.finishedDatetime = datetime.now()
+
+    form = ToDoListForm(request.POST or None, instance=to_do_list_item)
+    if request.method == "POST":
+        if form.is_valid():
+            form.save()
+            return redirect("to_do_list")
+    else:
+        return HttpResponse("something is wrong, inform website administrator")

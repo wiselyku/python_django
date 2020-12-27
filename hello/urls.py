@@ -23,4 +23,6 @@ urlpatterns = [
     path("log/", views.log_message, name="log"),
     path("todo/", to_do_list_view, name="to_do_list"),
     path("todolist_add/", views.to_do_list, name="to_do_list_add"),
+    path("todolist_edit/<id>", views.to_do_list_edit, name="to_do_list_edit"),
+    path("todolist_edit_ok/<id>", views.to_do_list_edit_ok, name="to_do_list_edit_ok"),
 ]

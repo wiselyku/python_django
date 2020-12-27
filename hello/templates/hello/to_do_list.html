@@ -13,6 +13,7 @@
                 <th>TaskName</th>
                 <th>TaskDone</th>
                 <th>FinishedDatetime</th>
+                <th>Management</th>
             </tr>
             </thead>
             <tbody>
@@ -31,7 +32,7 @@
                     {% else %}
                         <td>{{ to_do_item.finishedDatetime | date:'d M Y H:i:s' }}</td>
                     {% endif %}
-                    
+                    <td><a href="{% url 'to_do_list_edit' to_do_item.id %}">edit</td>
                 </tr>
             {% endfor %}
             </tbody>

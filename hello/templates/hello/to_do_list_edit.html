@@ -1,0 +1,30 @@
+{% extends "hello/layout.html" %}
+{% block title %}
+    Edit an item
+{% endblock %}
+{% block content %}
+    <h2>To Do List Item Information</h2>
+    <form action="/todolist_edit_ok/{{ data.id }}" method="POST">
+        {% csrf_token %}
+        <label>Task Name: </label><input id="to_do_list_item" type="text" name="taskName" value="{{ data.taskName }}"><br>
+        <label>Task Status</label>
+        <div>
+            {% if data.taskDone == True %}
+                <input type="radio" id="done" name="taskDone" value="True" checked>
+            {% else %}
+                <input type="radio" id="done" name="taskDone" value="True">
+            {% endif %}
+            <label for="yes">已經完成</label>
+          </div>
+          
+          <div>
+            {% if data.taskDone == False %}
+                <input type="radio" id="notDone" name="taskDone" value="False"  checked >
+            {% else %}
+                <input type="radio" id="notDone" name="taskDone" value="False" >
+            {% endif %}
+            <label for="no">尚未完成</label>
+          </div>
+        <input type="submit" value="Submit">
+    </form>
+{% endblock %}
