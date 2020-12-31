@@ -13,6 +13,7 @@
                 <th>TaskName</th>
                 <th>TaskDone</th>
                 <th>FinishedDatetime</th>
+                <th>TaskContent</th>
                 <th>Management</th>
             </tr>
             </thead>
@@ -32,6 +33,13 @@
                     {% else %}
                         <td>{{ to_do_item.finishedDatetime | date:'d M Y H:i:s' }}</td>
                     {% endif %}
+
+                    {% if to_do_item.taskContent == null %}
+                        <td>無資料</td>
+                    {% else %}
+                        <td>{{ to_do_item.taskContent }}</td>
+                    {% endif %}
+
                     <td><a href="{% url 'to_do_list_edit' to_do_item.id %}">edit</td>
                 </tr>
             {% endfor %}
@@ -44,7 +52,9 @@
     <form action="/todolist_add/" method="POST">
         {% csrf_token %}
         <label>Enter new task: </label><br>
-        <input id="to_do_list_item" type="text" name="taskName" value="">
+        <input id="to_do_list_item" type="text" name="taskName" value=""><br>
+        <label>Enter task content: </label><br>
+        <input id="to_do_list_item" type="text" name="taskContent" value=""><br>
         <input type="submit" value="Submit">
     </form>
 {% endblock %}

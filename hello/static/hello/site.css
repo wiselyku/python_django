@@ -39,7 +39,11 @@ input[name=message] {
     padding-right: 15px;
 }
 
-input[name=newTaskName] {
+input[name=taskName] {
+    width: 50%;
+}
+
+input[name=taskContent] {
     width: 80%;
 }
 

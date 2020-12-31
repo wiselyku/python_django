@@ -86,6 +86,9 @@ def to_do_list_edit_ok(request, id):
     if taskDone == 'True':
         to_do_list_item.taskDone = True
         to_do_list_item.finishedDatetime = datetime.now()
+    else:
+        to_do_list_item.taskDone = False
+        to_do_list_item.finishedDatetime = None
 
     form = ToDoListForm(request.POST or None, instance=to_do_list_item)
     if request.method == "POST":

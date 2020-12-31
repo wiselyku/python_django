@@ -9,6 +9,6 @@ class LogMessageForm(forms.ModelForm):
 class ToDoListForm(forms.ModelForm):
     class Meta:
         model = ToDoList
-        fields = ("taskName",)
+        fields = ("taskName","taskContent",)
 
         

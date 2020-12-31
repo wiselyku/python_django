@@ -9,7 +9,7 @@ home_list_view = views.HomeListView.as_view(
 )
 
 to_do_list_view = views.ToDoListView.as_view(
-    queryset=ToDoList.objects.order_by("createdDatetime")[:5],
+    queryset=ToDoList.objects.order_by("createdDatetime")[:20],
     context_object_name="to_do_list",
     template_name="hello/to_do_list.html",    
 )

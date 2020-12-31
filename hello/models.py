@@ -19,6 +19,7 @@ class ToDoList(models.Model):
     createdDatetime = models.DateTimeField("task created datetime")
     finishedDatetime = models.DateTimeField(null=True)
     taskDone = models.BooleanField(default=False)
+    taskContent = models.TextField(null=True)
 
     def __str__(self):
         datetime = timezone.localtime(self.createdDatetime)
